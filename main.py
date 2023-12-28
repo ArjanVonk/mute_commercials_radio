@@ -19,7 +19,7 @@ class SystemVolumeController(metaclass=Singleton):
     def __init__(self):
         self.volume = 0
         self.default_volume = 70
-        self.policy = SilencePolicy(silence_from_minute= 59, sound_from_minute = 7)
+        self.policy = SilencePolicy(silence_from_minute= 57, sound_from_minute = 5)
         self.volume_handler = VolumePCHandler()
         self.previous_volume = self.volume_handler.get_volume()
 
@@ -42,7 +42,7 @@ class SystemVolumeController(metaclass=Singleton):
     def check_for_updates(self, time):
         print(f"check for updates at: {time}")
         system_volume = self.volume_handler.get_volume()
-        print(system_volume)
+
         if self.volume !=system_volume :
             self.update_volume(system_volume)
 
@@ -105,8 +105,8 @@ class SilencePolicy():
 if __name__ == "__main__":
     volume_handler = SystemVolumeController()
     
-
     running = True
+
     while running:
         now = datetime.datetime.now()
         minutes = now.minute
